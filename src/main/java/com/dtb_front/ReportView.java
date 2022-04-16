@@ -47,6 +47,21 @@ public class ReportView extends VerticalLayout {
         grid.setColumns("date", "type", "income", "food", "housing", "transportation", "healthcare",
                 "personal", "kids", "entertainment", "miscellaneous", "travel", "debts", "savingAndInvesting");
         //"userId");
+        grid.getColumnByKey("date").setAutoWidth(true);
+        grid.getColumnByKey("type").setAutoWidth(true);
+        grid.getColumnByKey("income").setAutoWidth(true);
+        grid.getColumnByKey("food").setAutoWidth(true);
+        grid.getColumnByKey("housing").setAutoWidth(true);
+        grid.getColumnByKey("transportation").setAutoWidth(true);
+        grid.getColumnByKey("healthcare").setAutoWidth(true);
+        grid.getColumnByKey("personal").setAutoWidth(true);
+        grid.getColumnByKey("kids").setAutoWidth(true);
+        grid.getColumnByKey("entertainment").setAutoWidth(true);
+        grid.getColumnByKey("miscellaneous").setAutoWidth(true);
+        grid.getColumnByKey("travel").setAutoWidth(true);
+        grid.getColumnByKey("debts").setAutoWidth(true);
+        grid.getColumnByKey("savingAndInvesting").setAutoWidth(true);
+        grid.setColumnReorderingAllowed(true);
         add(topBar, dateBar, grid);
         setSizeFull();
         refresh();

@@ -66,7 +66,6 @@ public class NetWorthView extends VerticalLayout {
         grid.getColumnByKey("loans").setAutoWidth(true);
         grid.getColumnByKey("creditCards").setAutoWidth(true);
         grid.getColumnByKey("otherLiabilities").setAutoWidth(true);
-
         grid.setColumnReorderingAllowed(true);
         add(topBar, dateBar, grid);
         setSizeFull();

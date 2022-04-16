@@ -53,7 +53,7 @@ public class EntryMapper {
                 .savingAndInvesting(entry.getSavingAndInvesting())
                 .type(entry.getType())
                 .date(entry.getDate())
-                .userId(entry.getUser().getId())
+                .userId(1L)
                 .build();
     }
 

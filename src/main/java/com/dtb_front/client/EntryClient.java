@@ -1,6 +1,7 @@
 package com.dtb_front.client;
 
 import com.dtb_front.domain.EntryDto;
+import com.dtb_front.domain.EntryType;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,6 +40,27 @@ public class EntryClient {
         }
     }
 
+    public List<EntryDto> findEntriesByType(EntryType type) {
+        URI url = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/v1/entries/type")
+                .queryParam("type", type)
+                .build()
+                .encode()
+                .toUri();
+
+        try {
+            EntryDto[] entriesResponse = restTemplate.getForObject(url, EntryDto[].class);
+
+            List<EntryDto> entries = new ArrayList<>(Optional.ofNullable(entriesResponse)
+                    .map(Arrays::asList)
+                    .orElse(Collections.emptyList()));
+            System.out.println(entries);
+            return entries;
+        } catch (RestClientException e) {
+            //LOGGER.error(e.getMessage(), e);
+            return Collections.emptyList();
+        }
+    }
+
     public List<EntryDto> getReportByDate(LocalDate begin, LocalDate end) {
         URI url = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/v1/entries/reportByDate")
                 .queryParam("begin", begin)
@@ -59,5 +81,38 @@ public class EntryClient {
             //LOGGER.error(e.getMessage(), e);
             return Collections.emptyList();
         }
+    }
+
+    public EntryDto addEntry(EntryDto entryDto) {
+        URI url = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/v1/entries")
+                .queryParam("income", entryDto.getIncome())
+                .queryParam("food", entryDto.getFood())
+                .queryParam("housing", entryDto.getHousing())
+                .queryParam("transportation", entryDto.getTransportation())
+                .queryParam("healthcare", entryDto.getHealthcare())
+                .queryParam("personal", entryDto.getPersonal())
+                .queryParam("kids", entryDto.getKids())
+                .queryParam("entertainment", entryDto.getEntertainment())
+                .queryParam("miscellaneous", entryDto.getMiscellaneous())
+                .queryParam("travel", entryDto.getTravel())
+                .queryParam("debts", entryDto.getDebts())
+                .queryParam("savingAndInvesting", entryDto.getSavingAndInvesting())
+                .queryParam("type", entryDto.getType())
+                .queryParam("date", entryDto.getDate())
+                .queryParam("userId", entryDto.getUserId())
+                .build()
+                .encode()
+                .toUri();
+
+        return restTemplate.postForObject(url, entryDto, EntryDto.class);
+    }
+
+    public void deleteEntry(EntryDto entryDto) {
+        URI url = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/v1/entries/" + entryDto.getId())
+                .build()
+                .encode()
+                .toUri();
+
+        restTemplate.delete(url);
     }
 }
