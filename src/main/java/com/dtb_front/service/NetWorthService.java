@@ -1,6 +1,7 @@
 package com.dtb_front.service;
 
 import com.dtb_front.client.NetWorthClient;
+import com.dtb_front.domain.Entry;
 import com.dtb_front.domain.NetWorth;
 import com.dtb_front.mapper.NetWorthMapper;
 import org.springframework.web.client.RestTemplate;
@@ -16,7 +17,7 @@ public class NetWorthService {
     private NetWorthMapper netWorthMapper = new NetWorthMapper();
 
     private NetWorthService() {
-        this.netWorthList = exampleNetWorth();
+        this.netWorthList = getNetWorthList();
     }
 
     public static NetWorthService getInstance() {
@@ -27,25 +28,25 @@ public class NetWorthService {
     }
 
     public List getNetWorthList() {
-        return new ArrayList<>(netWorthList);
-    }
-
-    public void addNetWorth(NetWorth netWorth) {
-        this.netWorthList.add(netWorth);
-    }
-
-    private List exampleNetWorth() {
         List<NetWorth> netWorthList = netWorthMapper.mapToNetWorthList(netWorthClient.getNetWorth());
-        System.out.println(netWorthList);
-
         return netWorthList;
     }
 
-    public List filterNetWorthByDate(LocalDate begin, LocalDate end) {
+    public void addNetWorth(NetWorth netWorth) {
+        netWorthClient.addNetWorth(netWorthMapper.mapToNetWorthDto(netWorth));
+    }
+
+    public List getNetWorthByDate(LocalDate begin, LocalDate end) {
         List<NetWorth> netWorthListByDate = netWorthMapper.mapToNetWorthList(netWorthClient.getNetWorthByDate(begin, end));
-        System.out.println(begin);
-        System.out.println(end);
         return netWorthListByDate;
+    }
+
+    public void save(NetWorth netWorth) {
+        addNetWorth(netWorth);
+    }
+
+    public void delete(NetWorth netWorth) {
+        netWorthClient.deleteNetWorth(netWorthMapper.mapToNetWorthDto(netWorth));
     }
 
 }

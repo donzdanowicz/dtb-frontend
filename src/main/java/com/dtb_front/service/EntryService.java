@@ -20,7 +20,6 @@ public class EntryService {
     private EntryMapper entryMapper = new EntryMapper();
 
     private EntryService() {
-        //this.entries = exampleEntries();
         this.entries = getEntries();
     }
 
@@ -34,30 +33,30 @@ public class EntryService {
     public List getEntries() {
         //return new ArrayList<>(entries);
         List<Entry> entries = entryMapper.mapToEntryList(entryClient.getEntries());
-        System.out.println(entries);
-
         return entries;
-
     }
 
     public void addEntry(Entry entry) {
         entryClient.addEntry(entryMapper.mapToEntryDto(entry));
     }
 
-    /*private List exampleEntries() {
-        List<Entry> entries = entryMapper.mapToEntryList(entryClient.getEntries());
-        System.out.println(entries);
-
-        return entries;
-    }*/
-
-    public List findEntriesByType(EntryType type) {
-        List<Entry> entriesByType = entryMapper.mapToEntryList(entryClient.findEntriesByType(type));
+    public List getEntriesByType(EntryType type) {
+        List<Entry> entriesByType = entryMapper.mapToEntryList(entryClient.getEntriesByType(type));
         return entriesByType;
     }
 
-    public List filterReportByDate(LocalDate begin, LocalDate end) {
-        List<Entry> entriesByDate = entryMapper.mapToEntryList(entryClient.getReportByDate(begin, end));
+    public List getEntriesByDate(LocalDate begin, LocalDate end) {
+        List<Entry> entriesByDate = entryMapper.mapToEntryList(entryClient.getEntriesByDate(begin, end));
+        return entriesByDate;
+    }
+
+    public List getReports() {
+        List<Entry> reports = entryMapper.mapToEntryList(entryClient.getReports());
+        return reports;
+    }
+
+    public List getReportsByDate(LocalDate begin, LocalDate end) {
+        List<Entry> entriesByDate = entryMapper.mapToEntryList(entryClient.getReportsByDate(begin, end));
         return entriesByDate;
     }
 

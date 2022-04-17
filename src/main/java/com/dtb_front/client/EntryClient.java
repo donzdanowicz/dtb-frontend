@@ -40,7 +40,27 @@ public class EntryClient {
         }
     }
 
-    public List<EntryDto> findEntriesByType(EntryType type) {
+    public List<EntryDto> getReports() {
+        URI url = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/v1/entries/report")
+                .build()
+                .encode()
+                .toUri();
+
+        try {
+            EntryDto[] entriesResponse = restTemplate.getForObject(url, EntryDto[].class);
+
+            List<EntryDto> entries = new ArrayList<>(Optional.ofNullable(entriesResponse)
+                    .map(Arrays::asList)
+                    .orElse(Collections.emptyList()));
+            System.out.println(entries);
+            return entries;
+        } catch (RestClientException e) {
+            //LOGGER.error(e.getMessage(), e);
+            return Collections.emptyList();
+        }
+    }
+
+    public List<EntryDto> getEntriesByType(EntryType type) {
         URI url = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/v1/entries/type")
                 .queryParam("type", type)
                 .build()
@@ -61,8 +81,30 @@ public class EntryClient {
         }
     }
 
-    public List<EntryDto> getReportByDate(LocalDate begin, LocalDate end) {
-        URI url = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/v1/entries/reportByDate")
+    public List<EntryDto> getEntriesByDate(LocalDate begin, LocalDate end) {
+        URI url = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/v1/entries/date")
+                .queryParam("begin", begin)
+                .queryParam("end", end)
+                .build()
+                .encode()
+                .toUri();
+
+        try {
+            EntryDto[] entriesResponse = restTemplate.getForObject(url, EntryDto[].class);
+
+            List<EntryDto> entries = new ArrayList<>(Optional.ofNullable(entriesResponse)
+                    .map(Arrays::asList)
+                    .orElse(Collections.emptyList()));
+            System.out.println(entries);
+            return entries;
+        } catch (RestClientException e) {
+            //LOGGER.error(e.getMessage(), e);
+            return Collections.emptyList();
+        }
+    }
+
+    public List<EntryDto> getReportsByDate(LocalDate begin, LocalDate end) {
+        URI url = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/v1/entries/report/date")
                 .queryParam("begin", begin)
                 .queryParam("end", end)
                 .build()

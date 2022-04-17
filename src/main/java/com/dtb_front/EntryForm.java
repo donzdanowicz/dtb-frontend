@@ -17,7 +17,7 @@ import com.vaadin.flow.data.binder.PropertyId;
 import java.util.Locale;
 
 public class EntryForm extends FormLayout {
-    private MainView mainView;
+    private EntryView entryView;
     private EntryService service = EntryService.getInstance();
     private NumberField income = new NumberField("Income");
     private NumberField food = new NumberField("Food");
@@ -37,10 +37,9 @@ public class EntryForm extends FormLayout {
     private Button delete = new Button("Delete");
     private Binder<Entry> binder = new Binder<Entry>(Entry.class);
 
-    public EntryForm(MainView mainView) {
-        this.mainView = mainView;
+    public EntryForm(EntryView entryView) {
+        this.entryView = entryView;
         type.setItems(EntryType.values());
-        //date.getStyle().set("FormatString", "YYYY-MM-DD");
         HorizontalLayout buttons = new HorizontalLayout(save, delete);
         save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         add(type, date, income, food, housing, transportation, healthcare, personal, kids,
@@ -53,14 +52,14 @@ public class EntryForm extends FormLayout {
     private void save() {
         Entry entry = binder.getBean();
         service.save(entry);
-        mainView.refresh();
+        entryView.refresh();
         setEntry(null);
     }
 
     private void delete() {
         Entry entry = binder.getBean();
         service.delete(entry);
-        mainView.refresh();
+        entryView.refresh();
         setEntry(null);
     }
 
