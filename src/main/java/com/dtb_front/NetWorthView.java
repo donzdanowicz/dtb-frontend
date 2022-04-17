@@ -30,8 +30,9 @@ public class NetWorthView extends VerticalLayout {
     private Button reportViewButton = new Button();
     private Button netWorthViewButton = new Button();
     private Button currencyConverterViewButton = new Button();
+    private Button stockMarketViewButton = new Button();
     private Div topBar = new Div(mainViewButton, entryViewButton, reportViewButton, netWorthViewButton,
-            currencyConverterViewButton);
+            currencyConverterViewButton, stockMarketViewButton);
     private Div dateBar = new Div(newNetWorthButton, beginDate, endDate, submitDateButton);
 
     public NetWorthView() {
@@ -59,6 +60,9 @@ public class NetWorthView extends VerticalLayout {
         currencyConverterViewButton.setText("Currency Converter");
         currencyConverterViewButton.addClickListener(e -> UI.getCurrent().navigate(CurrencyConverterView.class));
         currencyConverterViewButton.getStyle().set("margin", "5px");
+        stockMarketViewButton.setText("Stock Market");
+        stockMarketViewButton.addClickListener(e -> UI.getCurrent().navigate(StockMarketView.class));
+        stockMarketViewButton.getStyle().set("margin", "5px");
         mainViewButton.getStyle().set("margin", "5px");
         entryViewButton.getStyle().set("margin", "5px");
         reportViewButton.getStyle().set("margin", "5px");

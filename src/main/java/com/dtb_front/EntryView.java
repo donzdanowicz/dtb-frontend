@@ -38,8 +38,9 @@ public class EntryView extends VerticalLayout {
     private Button reportViewButton = new Button();
     private Button netWorthViewButton = new Button();
     private Button currencyConverterViewButton = new Button();
+    private Button stockMarketViewButton = new Button();
     private Div topBar = new Div(mainViewButton, entryViewButton, reportViewButton, netWorthViewButton,
-            currencyConverterViewButton);
+            currencyConverterViewButton, stockMarketViewButton);
     private Div dateBar = new Div(newEntryButton, filter, filterButton, beginDate, endDate, submitDateButton);
 
     public EntryView() {
@@ -78,6 +79,9 @@ public class EntryView extends VerticalLayout {
         currencyConverterViewButton.setText("Currency Converter");
         currencyConverterViewButton.addClickListener(e -> UI.getCurrent().navigate(CurrencyConverterView.class));
         currencyConverterViewButton.getStyle().set("margin", "5px");
+        stockMarketViewButton.setText("Stock Market");
+        stockMarketViewButton.addClickListener(e -> UI.getCurrent().navigate(StockMarketView.class));
+        stockMarketViewButton.getStyle().set("margin", "5px");
         grid.setColumns("date", "type", "income", "food", "housing", "transportation", "healthcare",
                 "personal", "kids", "entertainment", "miscellaneous", "travel", "debts", "savingAndInvesting");
         //"userId");

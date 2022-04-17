@@ -44,7 +44,7 @@ public class StockMarketView extends VerticalLayout {
         netWorthViewButton.setText("Net Worth");
         netWorthViewButton.addClickListener(e -> UI.getCurrent().navigate(NetWorthView.class));
         currencyConverterViewButton.setText("Currency Converter");
-        currencyConverterViewButton.addClickListener(e -> UI.getCurrent().navigate(NetWorthView.class));
+        currencyConverterViewButton.addClickListener(e -> UI.getCurrent().navigate(CurrencyConverterView.class));
         stockMarketViewButton.setText("STOCK MARKET");
         mainViewButton.getStyle().set("margin", "5px");
         entryViewButton.getStyle().set("margin", "5px");
@@ -59,7 +59,7 @@ public class StockMarketView extends VerticalLayout {
         stockMarket.getStyle().set("margin", "5px");
         stockPrice.getStyle().set("margin", "5px");
         stockCurrency.getStyle().set("margin", "5px");
-        Anchor anchor = new Anchor("http://google.com", "Full list of stock symbols on Yahoo Finances");
+        Anchor anchor = new Anchor("https://finance.yahoo.com/", "Full list of stock symbols on Yahoo Finances");
         anchor.setTarget("_blank");
         anchor.getStyle().set("margin", "5px");
         add(topBar, getStockPriceBar, stockName, stockMarket, stockPriceBar, space, anchor);
