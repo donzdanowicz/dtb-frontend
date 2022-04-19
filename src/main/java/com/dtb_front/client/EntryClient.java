@@ -149,6 +149,31 @@ public class EntryClient {
         return restTemplate.postForObject(url, entryDto, EntryDto.class);
     }
 
+    public void updateEntry(EntryDto entryDto) {
+        URI url = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/v1/entries")
+                .queryParam("id", entryDto.getId())
+                .queryParam("income", entryDto.getIncome())
+                .queryParam("food", entryDto.getFood())
+                .queryParam("housing", entryDto.getHousing())
+                .queryParam("transportation", entryDto.getTransportation())
+                .queryParam("healthcare", entryDto.getHealthcare())
+                .queryParam("personal", entryDto.getPersonal())
+                .queryParam("kids", entryDto.getKids())
+                .queryParam("entertainment", entryDto.getEntertainment())
+                .queryParam("miscellaneous", entryDto.getMiscellaneous())
+                .queryParam("travel", entryDto.getTravel())
+                .queryParam("debts", entryDto.getDebts())
+                .queryParam("savingAndInvesting", entryDto.getSavingAndInvesting())
+                .queryParam("type", entryDto.getType())
+                .queryParam("date", entryDto.getDate())
+                .queryParam("userId", entryDto.getUserId())
+                .build()
+                .encode()
+                .toUri();
+
+        restTemplate.put(url, entryDto);
+    }
+
     public void deleteEntry(EntryDto entryDto) {
         URI url = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/v1/entries/" + entryDto.getId())
                 .build()

@@ -36,13 +36,14 @@ public class NetWorthForm extends FormLayout {
     private NumberField otherLiabilities = new NumberField("Other Liabilities");
     private DatePicker date = new DatePicker("Date");
     private Button save = new Button("Save");
+    private Button update = new Button("Update");
     private Button delete = new Button("Delete");
     private Binder<NetWorth> binder = new Binder<NetWorth>(NetWorth.class);
 
 
     public NetWorthForm(NetWorthView netWorthView) {
         this.netWorthView = netWorthView;
-        HorizontalLayout buttons = new HorizontalLayout(save, delete);
+        HorizontalLayout buttons = new HorizontalLayout(save, update, delete);
         save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         assets.setText("ASSETS");
         assets.getStyle().set("size", "30px");
@@ -52,12 +53,20 @@ public class NetWorthForm extends FormLayout {
                 homeContent, otherAssets, liabilities, mortgage, loans, creditCards, otherLiabilities, buttons);
         binder.bindInstanceFields(this);
         save.addClickListener(event -> save());
+        update.addClickListener(event -> update());
         delete.addClickListener(event -> delete());
     }
 
     private void save() {
         NetWorth netWorth= binder.getBean();
         service.save(netWorth);
+        netWorthView.refresh();
+        setNetWorth(null);
+    }
+
+    private void update() {
+        NetWorth netWorth= binder.getBean();
+        service.update(netWorth);
         netWorthView.refresh();
         setNetWorth(null);
     }

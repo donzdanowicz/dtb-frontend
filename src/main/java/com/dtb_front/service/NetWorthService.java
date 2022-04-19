@@ -36,6 +36,10 @@ public class NetWorthService {
         netWorthClient.addNetWorth(netWorthMapper.mapToNetWorthDto(netWorth));
     }
 
+    public void updateNetWorth(NetWorth netWorth) {
+        netWorthClient.updateNetWorth(netWorthMapper.mapToNetWorthDto(netWorth));
+    }
+
     public List getNetWorthByDate(LocalDate begin, LocalDate end) {
         List<NetWorth> netWorthListByDate = netWorthMapper.mapToNetWorthList(netWorthClient.getNetWorthByDate(begin, end));
         return netWorthListByDate;
@@ -43,6 +47,10 @@ public class NetWorthService {
 
     public void save(NetWorth netWorth) {
         addNetWorth(netWorth);
+    }
+
+    public void update(NetWorth netWorth) {
+        updateNetWorth(netWorth);
     }
 
     public void delete(NetWorth netWorth) {

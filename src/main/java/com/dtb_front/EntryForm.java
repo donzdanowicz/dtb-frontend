@@ -34,24 +34,33 @@ public class EntryForm extends FormLayout {
     private DatePicker date = new DatePicker("Date");
     private ComboBox<EntryType> type = new ComboBox<>("Entry type");
     private Button save = new Button("Save");
+    private Button update = new Button("Update");
     private Button delete = new Button("Delete");
     private Binder<Entry> binder = new Binder<Entry>(Entry.class);
 
     public EntryForm(EntryView entryView) {
         this.entryView = entryView;
         type.setItems(EntryType.values());
-        HorizontalLayout buttons = new HorizontalLayout(save, delete);
+        HorizontalLayout buttons = new HorizontalLayout(save, update, delete);
         save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         add(type, date, income, food, housing, transportation, healthcare, personal, kids,
                 entertainment, miscellaneous, travel, debts, savingAndInvesting, buttons);
         binder.bindInstanceFields(this);
         save.addClickListener(event -> save());
+        update.addClickListener(event -> update());
         delete.addClickListener(event -> delete());
     }
 
     private void save() {
         Entry entry = binder.getBean();
         service.save(entry);
+        entryView.refresh();
+        setEntry(null);
+    }
+
+    private void update() {
+        Entry entry = binder.getBean();
+        service.update(entry);
         entryView.refresh();
         setEntry(null);
     }

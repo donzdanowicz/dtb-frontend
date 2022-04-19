@@ -83,6 +83,31 @@ public class NetWorthClient {
         return restTemplate.postForObject(url, netWorthDto, NetWorthDto.class);
     }
 
+    public void updateNetWorth(NetWorthDto netWorthDto) {
+        URI url = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/v1/netWorth")
+                .queryParam("id", netWorthDto.getId())
+                .queryParam("realEstate", netWorthDto.getRealEstate())
+                .queryParam("cash", netWorthDto.getCash())
+                .queryParam("vehicles", netWorthDto.getVehicles())
+                .queryParam("savingsAndInvestments", netWorthDto.getSavingsAndInvestments())
+                .queryParam("foreignCurrencies", netWorthDto.getForeignCurrencies())
+                .queryParam("stocks", netWorthDto.getStocks())
+                .queryParam("collections", netWorthDto.getCollections())
+                .queryParam("homeContent", netWorthDto.getHomeContent())
+                .queryParam("otherAssets", netWorthDto.getOtherAssets())
+                .queryParam("mortgage", netWorthDto.getMortgage())
+                .queryParam("loans", netWorthDto.getLoans())
+                .queryParam("creditCards", netWorthDto.getCreditCards())
+                .queryParam("otherLiabilities", netWorthDto.getOtherLiabilities())
+                .queryParam("date", netWorthDto.getDate())
+                .queryParam("userId", netWorthDto.getUserId())
+                .build()
+                .encode()
+                .toUri();
+
+        restTemplate.put(url, netWorthDto);
+    }
+
     public void deleteNetWorth(NetWorthDto netWorthDto) {
         URI url = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/v1/netWorth/" + netWorthDto.getId())
                 .build()

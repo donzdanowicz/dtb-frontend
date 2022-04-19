@@ -40,6 +40,10 @@ public class EntryService {
         entryClient.addEntry(entryMapper.mapToEntryDto(entry));
     }
 
+    public void updateEntry(Entry entry) {
+        entryClient.updateEntry(entryMapper.mapToEntryDto(entry));
+    }
+
     public List getEntriesByType(EntryType type) {
         List<Entry> entriesByType = entryMapper.mapToEntryList(entryClient.getEntriesByType(type));
         return entriesByType;
@@ -62,6 +66,10 @@ public class EntryService {
 
     public void save(Entry entry) {
         addEntry(entry);
+    }
+
+    public void update(Entry entry) {
+        updateEntry(entry);
     }
 
     public void delete(Entry entry) {
