@@ -12,6 +12,7 @@ public class MainView extends VerticalLayout {
 
     private EntryService entryService = EntryService.getInstance();
     private Span title = new Span("DARE TO BUDGET!");
+    private Button userViewButton = new Button();
     private Button entryViewButton = new Button();
     private Button reportViewButton = new Button();
     private Button netWorthViewButton = new Button();
@@ -21,6 +22,9 @@ public class MainView extends VerticalLayout {
     public MainView() {
         title.getElement().getStyle().set("font-size", "45px");
         title.getStyle().set("margin", "40px");
+        userViewButton.setText("ADD USER");
+        userViewButton.addClickListener(e -> UI.getCurrent().navigate(UserView.class));
+        userViewButton.getStyle().set("margin", "20px");
         entryViewButton.setText("ENTRIES");
         entryViewButton.addClickListener(e -> UI.getCurrent().navigate(EntryView.class));
         entryViewButton.getStyle().set("margin", "20px");
@@ -36,7 +40,7 @@ public class MainView extends VerticalLayout {
         stockMarketViewButton.setText("STOCK MARKET");
         stockMarketViewButton.addClickListener(e -> UI.getCurrent().navigate(StockMarketView.class));
         stockMarketViewButton.getStyle().set("margin", "20px");
-        VerticalLayout mainContent = new VerticalLayout(title, entryViewButton, reportViewButton, netWorthViewButton,
+        VerticalLayout mainContent = new VerticalLayout(title, userViewButton, entryViewButton, reportViewButton, netWorthViewButton,
                 currencyConverterViewButton, stockMarketViewButton);
         mainContent.setSizeFull();
         mainContent.setAlignItems(Alignment.CENTER);

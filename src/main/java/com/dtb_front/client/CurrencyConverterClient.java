@@ -30,34 +30,34 @@ public class CurrencyConverterClient {
 
         Double response = restTemplate.getForObject(url, Double.class);
 
-        CurrencyDto currencyDto = CurrencyDto.builder()
-                .fromCurrency(from)
-                .toCurrency(to)
-                .rate(response/amountFrom)
-                .amount(amountFrom)
-                .convertedAmount(response)
-                .created(LocalDateTime.now())
-                .build();
-
-        createCurrencyEntry(currencyDto);
+//        CurrencyDto currencyDto = CurrencyDto.builder()
+//                .fromCurrency(from)
+//                .toCurrency(to)
+//                .rate(response/amountFrom)
+//                .amount(amountFrom)
+//                .convertedAmount(response)
+//                .created(LocalDateTime.now())
+//                .build();
+//
+//        createCurrencyEntry(currencyDto);
 
         return response;
     }
 
-    public CurrencyDto createCurrencyEntry(CurrencyDto currencyDto) {
-        URI url = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/v1/currencies")
-                .queryParam("fromCurrency", currencyDto.getFromCurrency())
-                .queryParam("toCurrency", currencyDto.getToCurrency())
-                .queryParam("rate", currencyDto.getRate())
-                .queryParam("amount", currencyDto.getAmount())
-                .queryParam("convertedAmount", currencyDto.getConvertedAmount())
-                .queryParam("created", currencyDto.getCreated())
-                .build()
-                .encode()
-                .toUri();
-
-        return restTemplate.postForObject(url, currencyDto, CurrencyDto.class);
-    }
+//    public CurrencyDto createCurrencyEntry(CurrencyDto currencyDto) {
+//        URI url = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/v1/currencies")
+//                .queryParam("fromCurrency", currencyDto.getFromCurrency())
+//                .queryParam("toCurrency", currencyDto.getToCurrency())
+//                .queryParam("rate", currencyDto.getRate())
+//                .queryParam("amount", currencyDto.getAmount())
+//                .queryParam("convertedAmount", currencyDto.getConvertedAmount())
+//                .queryParam("created", currencyDto.getCreated())
+//                .build()
+//                .encode()
+//                .toUri();
+//
+//        return restTemplate.postForObject(url, currencyDto, CurrencyDto.class);
+//    }
 
     public CurrencyDto getLatestCurrency(String from, String to) {
         URI url = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/v1/currencies/latest")

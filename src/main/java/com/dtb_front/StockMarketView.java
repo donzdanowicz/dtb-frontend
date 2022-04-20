@@ -6,7 +6,6 @@ import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
@@ -32,7 +31,9 @@ public class StockMarketView extends VerticalLayout {
             currencyConverterViewButton, stockMarketViewButton);
     private Div getStockPriceBar = new Div(symbol, getStockPriceButton);
     private Div stockPriceBar = new Div(stockPrice, stockCurrency);
-    private Span space = new Span("");
+    private Span info = new Span("Tip: Stocks from US markets: just type in the symbol, e.g. AAPL");
+    private Span info2 = new Span("Stocks from other markets: add market's shortcut after a dot, " +
+            "e.g. CDR.WA (Warsaw, Poland), BMW.DE (Germany)");
 
     public StockMarketView() {
         mainViewButton.setText("MAIN VIEW");
@@ -62,7 +63,7 @@ public class StockMarketView extends VerticalLayout {
         Anchor anchor = new Anchor("https://finance.yahoo.com/", "Full list of stock symbols on Yahoo Finances");
         anchor.setTarget("_blank");
         anchor.getStyle().set("margin", "5px");
-        add(topBar, getStockPriceBar, stockName, stockMarket, stockPriceBar, space, anchor);
+        add(topBar, info, info2, getStockPriceBar, stockName, stockMarket, stockPriceBar, anchor);
         setSizeFull();
     }
 

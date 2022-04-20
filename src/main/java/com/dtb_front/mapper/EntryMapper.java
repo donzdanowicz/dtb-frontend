@@ -1,10 +1,13 @@
 package com.dtb_front.mapper;
 
+import com.dtb_front.client.UserClient;
 import com.dtb_front.domain.Entry;
 import com.dtb_front.domain.EntryDto;
 import com.dtb_front.domain.User;
+import com.dtb_front.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -31,8 +34,7 @@ public class EntryMapper {
                 .savingAndInvesting(entryDto.getSavingAndInvesting())
                 .type(entryDto.getType())
                 .date(entryDto.getDate())
-                .user(new User(1L, "John", "Shoggoth", LocalDateTime.now(), "PLN"))
-                //.user(userRepository.findById(entryDto.getUserId()).orElseThrow(UserNotFoundException::new))
+                .user(new User(1L, "John", "Shoggoth", LocalDateTime.now(), "PLN", true))
                 .build();
     }
 

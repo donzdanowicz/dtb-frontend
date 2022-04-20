@@ -15,4 +15,5 @@ public class User {
     private String lastName;
     private LocalDateTime created;
     private String currency;
+    private boolean active;
 }

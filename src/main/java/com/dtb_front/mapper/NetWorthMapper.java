@@ -35,7 +35,7 @@ public class NetWorthMapper {
                 .totalLiabilities(netWorthDto.getTotalLiabilities())
                 .totalNetWorth(netWorthDto.getTotalNetWorth())
                 .date(netWorthDto.getDate())
-                .user(new User(1L, "John", "Shoggoth", LocalDateTime.now(), "PLN"))
+                .user(new User(1L, "John", "Shoggoth", LocalDateTime.now(), "PLN", false))
                 //.user(userRepository.findById(netWorthDto.getUserId()).orElseThrow(UserNotFoundException::new))
                 .build();
     }
@@ -93,12 +93,8 @@ public class NetWorthMapper {
                 .loans(netWorthDto.getLoans())
                 .creditCards(netWorthDto.getCreditCards())
                 .otherLiabilities(netWorthDto.getOtherLiabilities())
-//                .totalAssets(netWorthDto.getTotalAssets())
-//                .totalLiabilities(netWorthDto.getTotalLiabilities())
-//                .totalNetWorth(netWorthDto.getTotalNetWorth())
                 .date(netWorthDto.getDate())
-                .user(new User(1L, "John", "Shoggoth", LocalDateTime.now(), "PLN"))
-                //.user(userRepository.findById(netWorthDto.getUserId()).orElseThrow(UserNotFoundException::new))
+                .user(new User(1L, "John", "Shoggoth", LocalDateTime.now(), "PLN", true))
                 .build();
     }
 
